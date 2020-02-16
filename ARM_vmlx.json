@@ -256,8 +256,6 @@
                         "provisionVMAgent": true
                     },
                     "secrets": [],
-                    "allowExtensionOperations": true,
-                    "requireGuestProvisionSignal": true
                 },
                 "networkProfile": {
                     "networkInterfaces": [
