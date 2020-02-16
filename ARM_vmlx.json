@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "storageAccount": {
+        "stgAcc": {
             "defaultValue": "cloudlabdiag446",
             "type": "string"
         },
@@ -108,7 +108,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-06-01",
-            "name": "[parameters('storageAccounts')]",
+            "name": "[parameters('stgAcc')]",
             "location": "brazilsouth",
             "sku": {
                 "name": "Standard_LRS",
@@ -177,9 +177,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('storageAccounts'), '/default')]",
+            "name": "[concat(parameters('stgAcc'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('stgAcc'))]"
             ],
             "sku": {
                 "name": "Standard_LRS"
@@ -196,9 +196,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('storageAccounts'), '/default')]",
+            "name": "[concat(parameters('stgAcc'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('stgAcc'))]"
             ],
             "sku": {
                 "name": "Standard_LRS"
@@ -216,7 +216,7 @@
             "location": "brazilsouth",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', parameters('ifName'))]",
-                "[resourceId('Microsoft.Storage/StorageAccounts', parameters('storageAccounts'))]"
+                "[resourceId('Microsoft.Storage/StorageAccounts', parameters('stgAcc'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -269,7 +269,7 @@
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": true,
-                        "storageUri": "[concat('https://', parameters('storageAccounts'), '.blob.core.windows.net/')]"
+                        "storageUri": "[concat('https://', parameters('stgAcc'), '.blob.core.windows.net/')]"
                     }
                 }
             }
@@ -277,10 +277,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('storageAccounts'), '/default/bootdiagnostics-acmebrdev-1fed6ff3-3614-4296-95cb-2bc2635ead11')]",
+            "name": "[concat(parameters('stgAcc'), '/default/bootdiagnostics-acmebrdev-1fed6ff3-3614-4296-95cb-2bc2635ead11')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('stgAcc'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('stgAcc'))]"
             ],
             "properties": {
                 "publicAccess": "None"
