@@ -1,0 +1,44 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "defaultValue": "brazilsouth",
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "type": "string"
+        },
+        "serviceEndpointPolicyName": {
+            "defaultValue": "svcEndpolicy-stgAccess",
+            "type": "string"
+        },
+        "serviceEndpointDefinitionName": {
+            "defaultValue": "svcEndDef-stgAccess",
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/serviceEndpointPolicies",
+            "name": "[parameters('serviceEndpointPolicyName')]",
+            "location": "[parameters('location')]",
+            "apiVersion": "2019-08-01",
+            "dependsOn": [],
+            "properties": {
+                "serviceEndpointPolicyDefinitions": [
+                    {
+                        "name": "[parameters('serviceEndpointDefinitionName')]",
+                        "properties": {
+                            "service": "Microsoft.Storage",
+                            "serviceResources": [
+                                "resourceId('Microsoft.Storage/storageAccounts'",
+                            ]
+                        }
+                    }
+                ]
+            },
+            "tags": {}
+        }
+    ]
+}

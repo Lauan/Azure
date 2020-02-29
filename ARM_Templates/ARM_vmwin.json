@@ -11,7 +11,7 @@
             "type": "string"
         },
         "vmName": {
-            "defaultValue": "acme-br-dev-vmwin01",
+            "defaultValue": "acmebrdevvmwn01",
             "type": "string"
         },
         "ifName": {
