@@ -1,0 +1,195 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "defaultValue": "brazilsouth",
+            "type": "string"
+        },
+        "storageAccountName": {
+            "defaultValue": "acmebrdevstgacc03",
+            "type": "string"
+        },
+        "accountType": {
+            "defaultValue": "Standard_LRS",
+            "type": "string"
+        },
+        "kind": {
+            "defaultValue": "StorageV2",
+            "type": "string"
+        },
+        "accessTier": {
+            "defaultValue": "Hot",
+            "type": "string"
+        },
+        "supportsHttpsTrafficOnly": {
+            "defaultValue": true,
+            "type": "bool"
+        },
+        "networkAclsBypass": {
+            "type": "string"
+        },
+        "networkAclsDefaultAction": {
+            "type": "string"
+        },
+        "largeFileSharesState": {
+            "defaultValue": "Disabled",
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-06-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "accessTier": "[parameters('accessTier')]",
+                "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]",
+                "networkAcls": {
+                    "bypass": "[parameters('networkAclsBypass')]",
+                    "defaultAction": "[parameters('networkAclsDefaultAction')]",
+                    "ipRules": []
+                },
+                "largeFileSharesState": "[parameters('largeFileSharesState')]"
+            },
+            /*"dependsOn": [
+                "Microsoft.Resources/deployments/acme-br-dev-vn01_99633b6a-bd40-4801-94ee-b74ae020c057"
+            ],*/
+            "sku": {
+                "name": "[parameters('accountType')]"
+            },
+            "kind": "[parameters('kind')]",
+            "tags": {}
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "type": "Microsoft.Resources/deployments",
+            "name": "acmebrdevstgacc03pri_99633b6a-bd40-4801-94ee-b74ae020c058",
+            "subscriptionId": "162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576",
+            "resourceGroup": "CloudLab2",
+            "dependsOn": [
+                "microsoft.storage/storageaccounts/acmebrdevstgacc03"
+            ],
+            "resources": [],
+            "properties": {
+                "mode": "Incremental",
+                "parameters": {
+                    "privateEndpointName": {
+                        "value": "acmebrdevstgacc03privendpoint"
+                    },
+                    "privateEndpointConnectionId": {
+                        "value": "/subscriptions/162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576/resourceGroups/CloudLab2/providers/Microsoft.Network/privateEndpoints/privateLinkServiceConnections/acmebrdevstgacc03privendpoint_689e59ef-8b47-4090-a0f5-651bcc94e02c"
+                    },
+                    "privateEndpointConnectionName": {
+                        "value": "acmebrdevstgacc03privendpoint_689e59ef-8b47-4090-a0f5-651bcc94e02c"
+                    },
+                    "privateEndpointId": {
+                        "value": "/subscriptions/162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576/resourceGroups/CloudLab2/providers/Microsoft.Network/privateEndpoints/acmebrdevstgacc03privendpoint"
+                    },
+                    "privateEndpointApiVersion": {
+                        "value": "2019-04-01"
+                    },
+                    "privateLinkServiceId": {
+                        "value": "/subscriptions/162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576/resourcegroups/CloudLab2/providers/Microsoft.Storage/storageAccounts/acmebrdevstgacc03"
+                    },
+                    "groupId": {
+                        "value": "file"
+                    },
+                    "subnetId": {
+                        "value": "/subscriptions/162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576/resourceGroups/CloudLab2/providers/Microsoft.Network/virtualNetworks/acme-br-dev-vn01/subnets/lan-app"
+                    },
+                    "location": {
+                        "value": "brazilsouth"
+                    },
+                    "tags": {
+                        "value": {}
+                    }
+                },
+                "templatelink": {
+                    "contentVersion": "1.0.0.0",
+                    "uri": "https://storage.hosting.portal.azure.net/storage/Content/4.13.392.912/DeploymentTemplates/PrivateEndpointForStorage.json"
+                }
+            }
+        },
+        {
+            "apiVersion": "2017-05-10",
+            "name": "PrivateDns-99633b6abd40480194eeb74ae020c059",
+            "type": "Microsoft.Resources/deployments",
+            "resourceGroup": "[string('CloudLab2')]",
+            "dependsOn": [
+                "[string('acmebrdevstgacc03pri_99633b6a-bd40-4801-94ee-b74ae020c058')]"
+            ],
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": [
+                        {
+                            "type": "Microsoft.Network/privateDnsZones",
+                            "apiVersion": "2018-09-01",
+                            "name": "[string('privatelink.file.core.windows.net')]",
+                            "location": "global",
+                            "tags": {},
+                            "properties": {}
+                        },
+                        {
+                            "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+                            "apiVersion": "2018-09-01",
+                            "name": "[concat(string('privatelink.file.core.windows.net'), '/', uniqueString(string('/subscriptions/162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576/resourceGroups/CloudLab2/providers/Microsoft.Network/virtualNetworks/acme-br-dev-vn01')))]",
+                            "location": "global",
+                            "dependsOn": [
+                                "[string('privatelink.file.core.windows.net')]"
+                            ],
+                            "properties": {
+                                "virtualNetwork": {
+                                    "id": "[string('/subscriptions/162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576/resourceGroups/CloudLab2/providers/Microsoft.Network/virtualNetworks/acme-br-dev-vn01')]"
+                                },
+                                "registrationEnabled": false
+                            }
+                        },
+                        {
+                            "apiVersion": "2017-05-10",
+                            "name": "EndpointDnsRecords-99633b6abd40480194eeb74ae020c059",
+                            "type": "Microsoft.Resources/deployments",
+                            "dependsOn": [
+                                "[string('privatelink.file.core.windows.net')]"
+                            ],
+                            "properties": {
+                                "mode": "Incremental",
+                                "templatelink": {
+                                    "contentVersion": "1.0.0.0",
+                                    "uri": "https://storage.hosting.portal.azure.net/storage/Content/4.13.392.912/DeploymentTemplates/PrivateDnsForPrivateEndpoint.json"
+                                },
+                                "parameters": {
+                                    "privateDnsName": {
+                                        "value": "[string('privatelink.file.core.windows.net')]"
+                                    },
+                                    "privateEndpointNicResourceId": {
+                                        "value": "[reference('acmebrdevstgacc03pri_99633b6a-bd40-4801-94ee-b74ae020c058').outputs.networkInterfaceId.value]"
+                                    },
+                                    "nicRecordsTemplateUri": {
+                                        "value": "https://storage.hosting.portal.azure.net/storage/Content/4.13.392.912/DeploymentTemplates/PrivateDnsForPrivateEndpointNic.json"
+                                    },
+                                    "ipConfigRecordsTemplateUri": {
+                                        "value": "https://storage.hosting.portal.azure.net/storage/Content/4.13.392.912/DeploymentTemplates/PrivateDnsForPrivateEndpointIpConfig.json"
+                                    },
+                                    "uniqueId": {
+                                        "value": "99633b6abd40480194eeb74ae020c059"
+                                    },
+                                    "existingRecords": {
+                                        "value": {}
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "subscriptionId": "[string('162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576')]"
+        }
+    ],
+    "outputs": {}
+}

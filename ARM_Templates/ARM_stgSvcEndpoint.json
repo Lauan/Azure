@@ -32,7 +32,7 @@
                         "properties": {
                             "service": "Microsoft.Storage",
                             "serviceResources": [
-                                "resourceId('Microsoft.Storage/storageAccounts'",
+                                "resourceId('Microsoft.Storage/storageAccounts'"
                             ]
                         }
                     }
