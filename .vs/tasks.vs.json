@@ -5,6 +5,11 @@
       "taskLabel": "task-Azure",
       "appliesTo": "/",
       "type": "launch"
+    },
+    {
+      "taskLabel": "task-PowerShell_Scripts",
+      "appliesTo": "PowerShell_Scripts/",
+      "type": "launch"
     }
   ]
 }
