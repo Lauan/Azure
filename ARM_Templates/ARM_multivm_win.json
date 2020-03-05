@@ -302,7 +302,7 @@
           }
         },
         "availabilitySet": {
-          "id": "[resourceId('Microsoft.Compute/avaliabilitysets', parameters('avSetName')]"
+          "id": "[resourceId('Microsoft.Compute/avaliabilitysets', parameters('avSetName'))]"
         }
       }
     },
