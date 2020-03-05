@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ARM_Templates",
+    "\\PowerShell_Scripts"
   ],
-  "SelectedNode": "\\ARM_vmlx.json",
+  "SelectedNode": "\\PowerShell_Scripts\\Create_FileShare.ps1",
   "PreviewInSolutionExplorer": false
 }
