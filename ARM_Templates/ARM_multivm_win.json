@@ -335,7 +335,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', [concat(parameters('vmPrefixName'), copyIndex(1), '-pip01')])]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', concat(parameters('vmPrefixName'), copyIndex(1), '-pip01'))]"
               },
               "subnet": {
                 "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnName'), variables('subnetName'))]"
