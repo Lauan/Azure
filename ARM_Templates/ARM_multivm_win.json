@@ -7,7 +7,7 @@
       "type": "string"
     },
     "vmPrefixName": {
-      "defaultValue": "acmebrdevvmwn01",
+      "defaultValue": "acmebrdevvmwn",
       "type": "string"
     },
     "pipName": {
