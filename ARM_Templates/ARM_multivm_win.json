@@ -85,8 +85,12 @@
     {
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2019-11-01",
-      "name": "[parameters('pipname')]",
+      "name": "[concat(parameters('vmPrefixName'), copyIndex(1), '-pip01')]",
       "location": "[parameters('location')]",
+      "copy": {
+        "name": "PIPCopy",
+        "count": "[parameters('numberOfVms')]"
+      },
       "sku": {
         "name": "Basic"
       },
@@ -323,8 +327,12 @@
       "apiVersion": "2019-11-01",
       "name": "[concat(parameters('vmPrefixName'), copyIndex(1), '-if01')]",
       "location": "[parameters('location')]",
+      "copy": {
+        "name": "IFCopy",
+        "count": "[parameters('numberOfVms')]"
+      },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('pipname'))]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', concat(parameters('vmPrefixName'), copyIndex(1), '-pip01'))]",
         "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnName'), 'lan-app')]",
         "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
       ],
