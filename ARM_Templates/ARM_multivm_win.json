@@ -309,7 +309,7 @@
     {
       "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
       "apiVersion": "2019-06-01",
-      "name": "[concat(variables('diagStorageAccountName'), '/default/', parameters('vmPrefixName'), copyIndex(1), uniqueString(resourceGroup().id))]",
+      "name": "[concat(variables('diagStorageAccountName'), '/default/', parameters('vmPrefixName'), uniqueString(resourceGroup().id))]",
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('diagStorageAccountName'), 'default')]",
         "[resourceId('Microsoft.Storage/storageAccounts', variables('diagStorageAccountName'))]"
