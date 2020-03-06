@@ -121,7 +121,7 @@
               "privateEndpointNetworkPolicies": "Enabled",
               "privateLinkServiceNetworkPolicies": "Enabled",
               "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
               }
             }
           }
@@ -167,7 +167,7 @@
     {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('avSetName')]",
-      "apiVersion": "2019-11-01",
+      "apiVersion": "2019-12-01",
       "location": "[parameters('location')]",
       "properties": {
         "platformFaultDomainCount": "[variables('avSetFaultDomainsCount')]",
