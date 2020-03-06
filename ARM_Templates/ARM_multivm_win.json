@@ -226,7 +226,7 @@
         "deleteRetentionPolicy": {
           "enabled": false
         }
-      }variables('diagStorageAccountName
+      }
     },
     {
       "type": "Microsoft.Storage/storageAccounts/fileServices",
