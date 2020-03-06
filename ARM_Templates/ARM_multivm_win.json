@@ -106,6 +106,9 @@
       "apiVersion": "2019-11-01",
       "name": "[parameters('vnName')]",
       "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
+      ],
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
