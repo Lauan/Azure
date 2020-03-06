@@ -333,7 +333,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Network/publicIPAddresses', concat(parameters('vmPrefixName'), copyIndex(1), '-pip01'))]",
-        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnName'), variables('subnetName')]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnName'), variables('subnetName'))]",
         "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
       ],
       "properties": {
