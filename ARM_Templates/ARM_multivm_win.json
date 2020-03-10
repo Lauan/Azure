@@ -286,7 +286,7 @@
           "dataDisks": []
         },
         "osProfile": {
-          "computerName": "[parameters('vmPrefixName')]",
+          "computerName": "[concat(parameters('vmPrefixName'), copyIndex(1))]",
           "adminUsername": "[parameters('userName')]",
           "adminPassword": "[parameters('adminPasswd')]",
           "WindowsConfiguration": {
