@@ -4,6 +4,6 @@
     "\\ARM_Templates",
     "\\PowerShell_Scripts"
   ],
-  "SelectedNode": "\\PowerShell_Scripts\\Create_FileShare.ps1",
+  "SelectedNode": "\\ARM_Templates\\ARM_multivm_win.json",
   "PreviewInSolutionExplorer": false
 }
