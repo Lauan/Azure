@@ -167,7 +167,7 @@
     {
       "type": "Microsoft.Network/virtualNetworks/subnets",
       "apiVersion": "2019-11-01",
-      "name": "[concat(parameters('vnName'), parameters('subnetName'))]",
+      "name": "[concat(parameters('vnName'), '/', parameters('subnetName'))]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnName'))]"
       ],
