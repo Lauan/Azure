@@ -92,7 +92,7 @@
         },
         "subnets": [
           {
-            "name": "parameters('subnetName')",
+            "name": "[parameters('subnetName')]",
             "properties": {
               "addressPrefix": "parameters('subnetAddr')",
               "delegations": [],
