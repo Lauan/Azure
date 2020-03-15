@@ -87,7 +87,7 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "parameters('netAddrSpace')"
+            "[parameters('netAddrSpace')]"
           ]
         },
         "subnets": [
