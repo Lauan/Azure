@@ -90,14 +90,14 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "parameters('netAddrSpace')"
+            "[parameters('netAddrSpace')]"
           ]
         },
         "subnets": [
           {
             "name": "[parameters('subnetName')]",
             "properties": {
-              "addressPrefix": "parameters('subnetAddr')",
+              "addressPrefix": "[parameters('subnetAddr')]",
               "delegations": [],
               "privateEndpointNetworkPolicies": "Enabled",
               "privateLinkServiceNetworkPolicies": "Enabled",
@@ -175,7 +175,7 @@
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnName'))]"
       ],
       "properties": {
-        "addressPrefix": "parameters('subnetAddr')",
+        "addressPrefix": "[parameters('subnetAddr')]",
         "delegations": [],
         "privateEndpointNetworkPolicies": "Enabled",
         "privateLinkServiceNetworkPolicies": "Enabled"
