@@ -4,6 +4,6 @@
     "\\ARM_Templates",
     "\\PowerShell_Scripts"
   ],
-  "SelectedNode": "\\ARM_Templates\\ARM_multivm_win.json",
+  "SelectedNode": "\\ARM_Templates\\ARM_vmwin_fullcustom.json",
   "PreviewInSolutionExplorer": false
 }

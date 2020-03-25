@@ -84,6 +84,9 @@
       "apiVersion": "2019-11-01",
       "name": "[parameters('vnName')]",
       "location": "brazilsouth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
+      ],
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
