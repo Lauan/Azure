@@ -1,0 +1,32 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnName": {
+            "value": "acme-br-dev-vn01"
+        },
+        "netAddrSpace": {
+            "value": "172.16.0.0/16"
+        },
+        "subnetAddr": {
+            "value": "172.16.0.0/16"
+        },
+        "subnetName": {
+            "value": "frontend"
+        },
+        "vmName": {
+            "value": "acmebrdevvmwn01"
+        },
+        "userName": {
+            "value": "master"
+        },
+        "adminPasswd": {
+            "reference": {
+                "keyVault": {
+                "id": "/subscriptions/162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576/resourceGroups/Lauan-CloudLab/providers/Microsoft.KeyVault/vaults/deployments-keyvault"
+                },
+                "secretName": "ServersPassword"
+            }
+        }
+    }
+}
