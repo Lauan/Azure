@@ -27,13 +27,7 @@
         "type": "string"
       },
       "adminPasswd": {
-          "type": "securestring",
-          "reference": {
-              "keyVault": {
-              "id": "/subscriptions/162cc7a3-c5be-4bf1-ad0d-7e6f2afc9576/resourceGroups/Lauan-CloudLab/providers/Microsoft.KeyVault/vaults/deployments-keyvault"
-              },
-              "secretName": "ServersPassword"
-          }
+          "type": "securestring"
       }
     },
     "variables": {
