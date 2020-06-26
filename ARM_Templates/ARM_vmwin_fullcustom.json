@@ -2,6 +2,10 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "location": {
+      "defaultValue": "brazilsouth",
+      "type": "string"
+    },
     "vnName": {
       "defaultValue": "acme-br-dev-vn01",
       "type": "string"
@@ -41,13 +45,13 @@
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2019-11-01",
       "name": "[variables('nsgName')]",
-      "location": "brazilsouth",
+      "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
           {
             "name": "RDP",
             "properties": {
-              "protocol": "TCP",
+              "protocol": "Tcp",
               "sourcePortRange": "*",
               "destinationPortRange": "3389",
               "sourceAddressPrefix": "*",
@@ -68,7 +72,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2019-11-01",
       "name": "[variables('pipname')]",
-      "location": "brazilsouth",
+      "location": "[parameters('location')]",
       "sku": {
         "name": "Basic"
       },
@@ -83,7 +87,7 @@
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2019-11-01",
       "name": "[parameters('vnName')]",
-      "location": "brazilsouth",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
       ],
@@ -116,7 +120,7 @@
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2019-06-01",
       "name": "[variables('diagStgAcc')]",
-      "location": "brazilsouth",
+      "location": "[parameters('location')]",
       "sku": {
         "name": "Standard_LRS",
         "tier": "Standard"
@@ -153,7 +157,7 @@
         "[resourceId('Microsoft.Network/networkSecurityGroups', variables('nsgName'))]"
       ],
       "properties": {
-        "protocol": "TCP",
+        "protocol": "Tcp",
         "sourcePortRange": "*",
         "destinationPortRange": "3389",
         "sourceAddressPrefix": "*",
@@ -220,7 +224,7 @@
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2019-07-01",
       "name": "[parameters('vmName')]",
-      "location": "brazilsouth",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkInterfaces', variables('ifName'))]",
         "[resourceId('Microsoft.Storage/StorageAccounts', variables('diagStgAcc'))]"
@@ -287,7 +291,7 @@
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2019-11-01",
       "name": "[variables('ifName')]",
-      "location": "brazilsouth",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/publicIPAddresses', variables('pipname'))]",
         "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnName'), parameters('subnetName'))]"
@@ -313,7 +317,7 @@
           "dnsServers": []
         },
         "enableAcceleratedNetworking": false,
-        "enableIPForwarding": false,
+        "enableIPForwarding": false
       }
     }
   ]
