@@ -30,7 +30,7 @@
             "defaultValue": "master",
             "type": "string"
         },
-        "adminSecurekey": {
+        "AdminPasswd": {
             "type": "securestring"
         }
     },
@@ -234,7 +234,7 @@
                         "createOption": "FromImage",
                         "caching": "ReadWrite",
                         "managedDisk": {
-                            "storageAccountType": "Premium_LRS",
+                            "storageAccountType": "Premium_LRS"
                         },
                         "diskSizeGB": 30
                     },
@@ -243,19 +243,9 @@
                 "osProfile": {
                     "computerName": "[parameters('vmName')]",
                     "adminUsername": "[parameters('userName')]",
-                    "linuxConfiguration": {
-                        "disablePasswordAuthentication": true,
-                        "ssh": {
-                            "publicKeys": [
-                                {
-                                    "path": "/home/master/.ssh/authorized_keys",
-                                    "keyData": "[parameters('adminSecurekey')]"
-                                }
-                            ]
-                        },
-                        "provisionVMAgent": true
-                    },
-                    "secrets": [],
+                    "adminPassword": "[parameters('AdminPasswd')]",
+                    "linuxConfiguration": {},
+                    "secrets": []
                 },
                 "networkProfile": {
                     "networkInterfaces": [
