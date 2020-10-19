@@ -17,7 +17,7 @@ $imgs = Get-AzStorageShare imgs -Context $stgCtx
 New-AzStorageDirectory -Share $imgs -Path jpg
 
 #Upload a file to the folder
-Set-AzStorageFileContent -Share $imgs -Source "C:\Users\lauan.coelho\Documents\compra_wap.png" -Path jpg
+Set-AzStorageFileContent -Share $imgs -Source "Path-to-file" -Path jpg
 
 #Download the file
 Get-AzStorageFileContent -Share $imgs -Path jpg/compra_wap.png -Destination C:\temp
