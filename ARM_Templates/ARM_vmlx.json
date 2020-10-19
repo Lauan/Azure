@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "stgAcc": {
-            "defaultValue": "cloudlabdiag446",
+            "defaultValue": "cloudlabdiag",
             "type": "string"
         },
         "vnName": {
