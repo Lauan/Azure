@@ -24,3 +24,5 @@ Get-AzStorageFileContent -Share $imgs -Path jpg/compra_wap.png -Destination C:\t
 
 #Remove the file
 Remove-AzStorageFile -Share $imgs -Path jpg/compra_wap.png
+
+#Teste de commit diretamente pelo GitHub
